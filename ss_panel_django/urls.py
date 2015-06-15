@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^adminmgr/', include('adminmgr.urls')),
+    url(r'^$','ss_panel_django.views.index' ,name='index'),
 ]
