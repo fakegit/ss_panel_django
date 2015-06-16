@@ -2,7 +2,7 @@
 import re
 
 
-class Strutils(object):
+class StrUtils(object):
 
     @staticmethod
     def isNull(ustr):
@@ -20,8 +20,13 @@ class Strutils(object):
 
 
 
+
+
 if __name__== '__main__':
-    print Strutils.isEmail("ducg@foxmail.com")
+    #print StrUtils.isEmail("ducg@foxmail.com")
+    test = "123321"
+    test1 = "123321"
+    print test!=test1
     #print 'fdsfsd'
 
 

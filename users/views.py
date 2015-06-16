@@ -23,5 +23,7 @@ def registerForm(request):
     email = request.POST.get('email')
     userpwd = request.POST.get('userpwd')
 
+    
+
     return render_to_response('users/register_success.html')
 
