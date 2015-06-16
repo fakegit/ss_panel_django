@@ -16,7 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    #url(r'^admin/', include(admin.site.urls)),
     url(r'^adminmgr/', include('adminmgr.urls')),
     url(r'^$','ss_panel_django.views.index' ,name='index'),
+    url(r'^login$','users.views.login' ,name='login'),
+    url(r'^register$','users.views.register' ,name='register'),
 ]

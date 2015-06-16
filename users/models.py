@@ -8,6 +8,7 @@ class Users(models.Model):
     email = models.CharField(unique=True,max_length=255)
     userpwd = models.CharField(max_length=255)
     sspwd = models.CharField(max_length=20)
+    register_ts = models.IntegerField()
     last_online_ts = models.IntegerField()
     up_transfer = models.BigIntegerField()
     down_transfer = models.BigIntegerField()
