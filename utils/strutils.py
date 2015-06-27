@@ -18,15 +18,21 @@ class StrUtils(object):
             flag = True
         return flag
 
+    @staticmethod
+    def isRightLen(ustr,umaxlength,uminlength):
+        flag = False
+        if len(ustr)<=int(umaxlength) and len(ustr)>=int(uminlength):
+            flag = True
 
-
+        return flag
 
 
 if __name__== '__main__':
-    #print StrUtils.isEmail("ducg@foxmail.com")
-    test = "123321"
-    test1 = "123321"
-    print test!=test1
+    print StrUtils.isRightLen("ducg@foxmail.comfdsfsdfsfdss",19,8)
+    #test = "123321"
+    #test1 = "123321"
+    #print test!=test1
+    #print len(test)
     #print 'fdsfsd'
 
 

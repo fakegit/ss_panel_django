@@ -4,15 +4,13 @@
 
 {% block content %}
 <h1>注册</h1>
-<form>
+<p>{{errmsg}}</p>
+<form action='/users/registerForm' method='post'>
 用户名<input name='username' type='text' /><br/>
 邮&nbsp;箱<input name='email' type='text' /><br/>
-密码<input name='userpwd' type='text' /><br/>
-确认密码<input name='reuserpwd' type='text' /><br/>
+密码<input name='userpwd' type='password' /><br/>
+确认密码<input name='reuserpwd' type='password' /><br/>
 <input type ='submit' value='注册'></input>
-</form>
-
-
 </form>
 {% endblock %}
 

@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$','ss_panel_django.views.index' ,name='index'),
     url(r'^login$','users.views.login' ,name='login'),
     url(r'^register$','users.views.register' ,name='register'),
+    url(r'^users/', include('users.urls')),
 ]

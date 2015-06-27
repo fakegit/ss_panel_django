@@ -12,12 +12,14 @@ class UsersService():
 
         if strutils.StrUtils.isNull(username) or strutils.StrUtils.isNull(email) or strutils.StrUtils.isNull(userpwd) or strutils.StrUtils.isNull(reuserpwd):
             return False,"必填项不能为空"
+        if not (strutils.StrUtils.isRightLen(username,30,8) and strutils.StrUtils.isRightLen(email,30,8) and strutils.StrUtils.isRightLen(userpwd,30,8)):
+            return False,"必填项过短或者过长"#
         if not strutils.StrUtils.isEmail(email):
             return False,"邮箱格式有误"
         if userpwd != reuserpwd:
-            return False,"邮箱格式有误"
-        return True
+            return False,"两次输入的密码不相同"
+        return True,"success"
 
 
 if __name__ == '__main__':
-    print UsersService.regParamCheck("heheheh","ducggg@foxmail.com","123321","123321")
+    print UsersService.regParamCheck("dsfsdffds","ducggg@foxmail.com","12322121","12332121")

@@ -15,4 +15,4 @@ class Users(models.Model):
     port = models.IntegerField()
     switch = models.IntegerField()
     enable = models.BooleanField(default=True)
-    type = models.IntegerField()
+    usertype = models.IntegerField()
