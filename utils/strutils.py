@@ -1,6 +1,6 @@
-# -*- coding:utf8-*-
+# -*- coding:utf8 -*-
 import re
-
+import random
 
 class StrUtils(object):
 
@@ -26,9 +26,13 @@ class StrUtils(object):
 
         return flag
 
+    @staticmethod
+    def getRandomStr(unum):
+        return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',unum))
+
 
 if __name__== '__main__':
-    print StrUtils.isRightLen("ducg@foxmail.comfdsfsdfsfdss",19,8)
+    print StrUtils.getRandomStr(8)
     #test = "123321"
     #test1 = "123321"
     #print test!=test1
