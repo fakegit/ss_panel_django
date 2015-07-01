@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response 
 from django.views.decorators.csrf import csrf_exempt
 from . import services
+from .forms import RegisterForm
 from users.models import Users
 from utils.timeutils import TimeUtils
 from utils.strutils import StrUtils
@@ -17,13 +18,13 @@ def login(request):
 
 
 def register(request):
+    form = RegisterForm()
 
-
-    return render_to_response('register.html')
+    return render_to_response('register.html',{'form':form})
 
 @csrf_exempt
 def registerForm(request):
-    if request.method=='GET':
+    if request.method =='GET':
         raise  Http404
     username = request.POST.get('username')
     email = request.POST.get('email')
@@ -52,3 +53,27 @@ def registerForm(request):
     user_data.save()
     return render_to_response('users/register_success.html',{'username':username})
 
+@csrf_exempt
+def registerForm1(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            userpwd = form.cleaned_data['userpwd']
+            email = form.cleaned_data['email']
+            reuserpwd = form.cleaned_data['reuserpwd']
+
+            return render_to_response('users/register_success.html',{'username':username})
+        else:
+            raise Http404
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
+
+@csrf_exempt
+def loginForm(request):
+    if request.method=='GET':
+        raise  Http404
+    username = request.POST.get('username')
+    userpwd = request.POST.get('userpwd')
+    return render_to_response('users/users_front.html')

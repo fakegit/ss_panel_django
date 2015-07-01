@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'adminmgr',
     'users',
-    'nodes'
-
+    'nodes',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -5,14 +5,20 @@
 {% block content %}
 <h1>登录!</h1>
 
-<form>
-<input type='text' />
-<input type='text' />
+<form action='/users/loginForm' method='post' >
+username<input type='text' name='username' /></br>
+password<input type='password' name='userpwd' /></br>
 
 <input type ='submit' value='登录'></input>
 </form>
 {% endblock %}
 
 {% block myscript %}
+<script type='text/javascript'>
+    $(document).ready(function(){
+        //alert('123qwe');
 
+    })
+
+</script>
 {% endblock %} 

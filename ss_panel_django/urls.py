@@ -23,3 +23,4 @@ urlpatterns = [
     url(r'^register$','users.views.register' ,name='register'),
     url(r'^users/', include('users.urls')),
 ]
+
