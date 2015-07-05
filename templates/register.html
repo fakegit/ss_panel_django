@@ -5,7 +5,7 @@
 {% block content %}
 <h1>注册</h1>
 <p>{{errmsg}}</p>
-<form action='/users/registerForm' method='post'>
+<form id='register_submit' action='/users/registerForm' method='post'>
     {% csrf_token %}
     {{form}}
     <!--label for='username'>用户名: </label>
@@ -16,11 +16,39 @@
     <label for='userpwd'>密码</label>
     <input id='userpwd' name='userpwd' type='password' />
     <label for='reuserpwd'>确认密码</label>
-    <input id='reuserpwd' name='reuserpwd' type='password' />
-    <input type ='submit' value='注册'></input-->
+    <input id='reuserpwd' name='reuserpwd' type='password' /-->
+    <input type ='submit' value='注册'></input>
+    <button class='js-captcha-refresh'>刷新验证码</button>
 </form>
 {% endblock %}
 
 {% block myscript %}
+{% load staticfiles %}
+<script  src="{% static "js/jquery.md5.js" %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
 
+    $('.js-captcha-refresh').click(function(){
+        var $form = $(this).parents('form');
+        var url = location.protocol + "//" + window.location.hostname + ":"
+                  + location.port + "/captcha/refresh/";
+
+        // Make the AJAX-call
+        $.getJSON(url, {}, function(json) {
+            $form.find('input[name="captcha_0"]').val(json.key);
+            $form.find('img.captcha').attr('src', json.image_url);
+        });
+
+        return false;
+    });
+
+    $('#register_submit').submit(function(){
+        $('#id_userpwd').val($.md5($('#id_userpwd').val()))
+        $('#id_reuserpwd').val($.md5($('#id_reuserpwd').val()))
+        return true;        
+    })
+
+});
+
+</script>
 {% endblock %} 
