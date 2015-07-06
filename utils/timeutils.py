@@ -8,9 +8,16 @@ class TimeUtils(object):
     def getTimeStamp():
         return  int (time.time())
 
+    @staticmethod
+    def getDatetimeFromTS(uts):
+        
+        timeArray = time.localtime(uts)
+        otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+        return otherStyleTime
+
 
 if __name__== '__main__':
-    print TimeUtils.getTimeStamp()
+    print TimeUtils.getDatetimeFromTS(1381419600)
 
     #test = "123321"
     #test1 = "123321"

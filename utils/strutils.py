@@ -1,6 +1,7 @@
 # -*- coding:utf8 -*-
 import re
 import random
+import uuid,base64
 
 class StrUtils(object):
 
@@ -30,9 +31,15 @@ class StrUtils(object):
     def getRandomStr(unum):
         return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',unum))
 
+    @staticmethod
+    def getUUUID(name):
+        return str(uuid.uuid5(uuid.NAMESPACE_DNS,str(name)))
+
 
 if __name__== '__main__':
-    print StrUtils.getRandomStr(8)
+    name = "strengthening12312312123getUUUID"
+    print base64.urlsafe_b64encode(StrUtils.getUUUID(name))
+    print base64.urlsafe_b64decode(base64.urlsafe_b64encode(StrUtils.getUUUID(name)))
     #test = "123321"
     #test1 = "123321"
     #print test!=test1

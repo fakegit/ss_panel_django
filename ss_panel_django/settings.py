@@ -120,6 +120,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 

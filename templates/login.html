@@ -5,9 +5,10 @@
 {% block content %}
 <h1>登录!</h1>
 
-<form  id='login_submit'  action='/users/loginForm' method='post' >
+<form  id='login_submit'  action='{% url 'loginForm' %}' method='post' >
     {% csrf_token %}
     {{form}}
+    {{errmsg}}
     <input type ='submit' value='登录'></input>
 </form>
 {% endblock %}

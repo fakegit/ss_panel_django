@@ -1,0 +1,9 @@
+.users-front-left{
+    
+    float:left;
+    width: 300px;
+}
+
+.users-front-right{
+    margin-left:300px;
+}
