@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^logout$',views.logout,name='logout'),
     url(r'^updateUserInfo$',views.updateUserInfo,name='updateUserInfo'),
     url(r'^updateUserInfoForm$',views.updateUserInfoForm,name='updateUserInfoForm'),
-
+    url(r'^updateSSPwdForm$',views.updateSSPwdForm,name='updateSSPwdForm'),
     
     url(r'^userCenter$',views.userCenter,name='userCenter'),
     

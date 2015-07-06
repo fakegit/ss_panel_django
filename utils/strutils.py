@@ -34,12 +34,17 @@ class StrUtils(object):
     @staticmethod
     def getUUUID(name):
         return str(uuid.uuid5(uuid.NAMESPACE_DNS,str(name)))
+    
+    @staticmethod
+    def getRandomNum(ustartnum,uendnum):
+        return random.randint(ustartnum,uendnum)
 
 
 if __name__== '__main__':
     name = "strengthening12312312123getUUUID"
-    print base64.urlsafe_b64encode(StrUtils.getUUUID(name))
-    print base64.urlsafe_b64decode(base64.urlsafe_b64encode(StrUtils.getUUUID(name)))
+    #print base64.urlsafe_b64encode(StrUtils.getUUUID(name))
+    #print base64.urlsafe_b64decode(base64.urlsafe_b64encode(StrUtils.getUUUID(name)))
+    print StrUtils.getRandomNum(1,5)
     #test = "123321"
     #test1 = "123321"
     #print test!=test1

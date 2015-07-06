@@ -77,7 +77,7 @@ def registerForm(request):
                 last_online_ts = register_ts,
                 up_transfer = 0,
                 down_transfer = 0,
-                port = int(Users.objects.aggregate(Max('port'))['port__max'] or 49999)+1,
+                port = int(Users.objects.aggregate(Max('port'))['port__max'] or 49999)+StrUtils.getRandomNum(1,3),
                 switch = 1,
                 enable = 1,
                 usertype = 0,
@@ -102,7 +102,7 @@ def updateUserInfo(request):
         user_data = Users.objects.get(useruuid=str(request.session['useruuid']))
         trans_data = user_data.to_dict()
         trans_data['updateLoginForm'] = UpdateLoginForm()
-        trans_data['updateSSForm'] = UpdateSSPwdForm()
+        trans_data['updateSSPwdForm'] = UpdateSSPwdForm()
         return render_to_response('users/users_front_update.html',trans_data)
     else:
         form = LoginForm()
@@ -118,23 +118,55 @@ def updateUserInfoForm(request):
             newpwd = updateLoginForm.cleaned_data['newpwd']
             renewpwd = updateLoginForm.cleaned_data['renewpwd']
             user_data = Users.objects.get(useruuid=str(request.session['useruuid']))
+
             trans_data = user_data.to_dict()
             trans_data['transfer_enable'] =  trans_data['transfer_enable']/1000/1000/1024
             trans_data['transfer_used'] = (trans_data['up_transfer'] + trans_data['down_transfer'])/1000/1000/1024
             trans_data['transfer_last'] = trans_data['transfer_enable']-trans_data['transfer_used']
             trans_data['last_online_ts'] = TimeUtils.getDatetimeFromTS(trans_data['last_online_ts'])
-                
-            if oldpwd == user_data.sspwd: 
+            trans_data['updateSSPwdForm'] = UpdateSSPwdForm()
+            trans_data['updateLoginForm'] = UpdateLoginForm()
+            encrptuserpwd = EncrptyUtils.getMd5(oldpwd+str(user_data.register_ts))
+            if encrptuserpwd == user_data.encrptuserpwd: 
                 if newpwd==renewpwd:
-                    user_data.sspwd = newpwd
+                    user_data.encrptuserpwd = EncrptyUtils.getMd5(newpwd+str(user_data.register_ts))
                     user_data.save()
                     trans_data['scsmsg']='更新密码成功'
                 else:
                     trans_data['errmsg']='两次输入的密码不一致'
                 return render_to_response('users/users_front_update.html',trans_data)
             else:
-                trans_data['errmsg']='原始链接密码输入错误,链接密码未修改成功'
+                trans_data['errmsg']='原始密码输入错误,密码未修改成功'
                 return render_to_response('users/users_front_update.html',trans_data)
+    else:
+        form = LoginForm()
+        return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))
+
+@csrf_exempt
+def updateSSPwdForm(request):
+    if 'useruuid' in request.session:
+        updateSSPwdForm = UpdateSSPwdForm(request.POST)
+        if updateSSPwdForm.is_valid():
+            sspwd = updateSSPwdForm.cleaned_data['sspwd']
+            resspwd = updateSSPwdForm.cleaned_data['resspwd']
+
+            user_data = Users.objects.get(useruuid=str(request.session['useruuid']))
+
+            trans_data = user_data.to_dict()
+            trans_data['transfer_enable'] =  trans_data['transfer_enable']/1000/1000/1024
+            trans_data['transfer_used'] = (trans_data['up_transfer'] + trans_data['down_transfer'])/1000/1000/1024
+            trans_data['transfer_last'] = trans_data['transfer_enable']-trans_data['transfer_used']
+            trans_data['last_online_ts'] = TimeUtils.getDatetimeFromTS(trans_data['last_online_ts'])
+            trans_data['updateSSPwdForm'] = UpdateSSPwdForm()
+            trans_data['updateLoginForm'] = UpdateLoginForm()
+            
+            if sspwd==resspwd:
+                user_data.sspwd = sspwd
+                user_data.save()
+                trans_data['scsmsg']='更新密码成功'
+            else:
+                trans_data['errmsg']='两次输入的密码不一致'
+            return render_to_response('users/users_front_update.html',trans_data)
     else:
         form = LoginForm()
         return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))

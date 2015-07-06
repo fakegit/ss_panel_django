@@ -24,5 +24,5 @@ class UpdateLoginForm(forms.Form):
     renewpwd = forms.CharField(widget=forms.PasswordInput,label='重复新密码',max_length=100)
    
 class UpdateSSPwdForm(forms.Form):
-    sspwd =  forms.CharField(label='连接密码',max_length=100)
-    resspwd =  forms.CharField(label='重复连接密码',max_length=100)
+    sspwd =  forms.CharField(widget=forms.PasswordInput,label='连接密码',max_length=100)
+    resspwd =  forms.CharField(widget=forms.PasswordInput,label='重复连接密码',max_length=100)
