@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}看世界{% endblock %}
+
+{% load staticfiles %}
+{% block link %}
+<link href="{% static "css/users.css" %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+{% include 'users/users_front_header.html' %}
+{% include 'users/users_front_left.html' %}
+
+<div class='users-front-right'>
+    <div>
+        <form id='userpwd_submit' action='{% url 'updateUserInfoForm' %}' method='POST'>
+            {% csrf_token %}
+            {{updateLoginForm}}
+            {{errmsg}}
+        <input type='submit' value='提交'/>
+        </form>
+    </div>
+
+    <div>
+        <form action='{% url 'updateSSPwdForm' %}' method = 'POST' >
+            {% csrf_token %}
+            {{updateSSPwdForm}}
+        <input type='submit' value ='提交'/>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block myscript %}
+<script src="{% static "js/jquery.md5.js" %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#userpwd_submit").submit(function() {
+            alert('dfasd')
+            $('#id_oldpwd').val($.md5($('#id_oldpwd').val()))
+            $('#id_newpwd').val($.md5($('#id_newpwd').val()))
+            $('#id_renewpwd').val($.md5($('#id_renewpwd').val()))
+            return true;
+        });
+    })
+
+</script>
+{% endblock %} 

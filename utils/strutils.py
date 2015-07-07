@@ -1,8 +1,9 @@
-# -*- coding:utf8-*-
+# -*- coding:utf8 -*-
 import re
+import random
+import uuid,base64
 
-
-class Strutils(object):
+class StrUtils(object):
 
     @staticmethod
     def isNull(ustr):
@@ -18,10 +19,36 @@ class Strutils(object):
             flag = True
         return flag
 
+    @staticmethod
+    def isRightLen(ustr,umaxlength,uminlength):
+        flag = False
+        if len(ustr)<=int(umaxlength) and len(ustr)>=int(uminlength):
+            flag = True
+
+        return flag
+
+    @staticmethod
+    def getRandomStr(unum):
+        return ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',unum))
+
+    @staticmethod
+    def getUUUID(name):
+        return str(uuid.uuid5(uuid.NAMESPACE_DNS,str(name)))
+    
+    @staticmethod
+    def getRandomNum(ustartnum,uendnum):
+        return random.randint(ustartnum,uendnum)
 
 
 if __name__== '__main__':
-    print Strutils.isEmail("ducg@foxmail.com")
+    name = "strengthening12312312123getUUUID"
+    #print base64.urlsafe_b64encode(StrUtils.getUUUID(name))
+    #print base64.urlsafe_b64decode(base64.urlsafe_b64encode(StrUtils.getUUUID(name)))
+    print StrUtils.getRandomNum(1,5)
+    #test = "123321"
+    #test1 = "123321"
+    #print test!=test1
+    #print len(test)
     #print 'fdsfsd'
 
 

@@ -5,14 +5,28 @@
 {% block content %}
 <h1>登录!</h1>
 
-<form>
-<input type='text' />
-<input type='text' />
-
-<input type ='submit' value='登录'></input>
+<form  id='login_submit'  action='{% url 'loginForm' %}' method='post' >
+    {% csrf_token %}
+    {{form}}
+    {{errmsg}}
+    <input type ='submit' value='登录'></input>
 </form>
 {% endblock %}
 
 {% block myscript %}
+{% load staticfiles %}
+<script src="{% static "js/jquery.md5.js" %}"></script>
 
+<script type='text/javascript'>
+    $(document).ready(function(){
+        //md5 password before submit form
+        $("#login_submit").submit(function() {
+            $('#id_userpwd').val($.md5($('#id_userpwd').val()))
+            //alert($('#id_userpwd').val());
+            return true;
+        });
+
+    })
+
+</script>
 {% endblock %} 

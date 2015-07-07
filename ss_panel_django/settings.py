@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'adminmgr',
     'users',
-    'nodes'
-
+    'nodes',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,9 +112,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+#STATIC_ROOT = '/var/www/html/ss_panel_django/static'
+
+
+
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 
 #if you has a local settings file like settings_local

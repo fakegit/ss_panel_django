@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}看世界{% endblock %}
+
+{% load staticfiles %}
+{% block link %}
+<link href="{% static "css/users.css" %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+{% include 'users/users_front_header.html' %}
+{% include 'users/users_front_left.html' %}
+
+<div class='users-front-right'>
+
+<h1>用户中心</h1>
+
+<h1>连接信息</h1>
+<div>
+<p>端口:{{port}}</p>
+<p>密码:{{sspwd}}</p>
+<p>最后使用时间:{{last_online_ts}}</p>
+</div>
+<h1>流量使用情况</h1>
+
+<p>总流量：{{transfer_enable}} G</p>
+<p>已使用流量：{{transfer_used}} G</p>
+<p>剩余流量：{{transfer_last}} G</p>
+<p></p>
+</div>
+{% endblock %}
+
+{% block myscript %}
+
+{% endblock %} 
