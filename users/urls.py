@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^updateSSPwdForm$',views.updateSSPwdForm,name='updateSSPwdForm'),
     
     url(r'^userCenter$',views.userCenter,name='userCenter'),
+    url(r'^nodeList$',views.nodeList,name='nodeList'),
     
 ]

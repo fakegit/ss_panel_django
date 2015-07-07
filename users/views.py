@@ -185,4 +185,12 @@ def userCenter(request):
         form = LoginForm()
         return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))
 
+def nodeList(request):
+    if 'useruuid' in request.session:
+        user_data = Users.objects.get(useruuid=str(request.session['useruuid']))
+        #trans_data = user_data.to_dict()
+
+    else:
+        form = LoginForm()
+        return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))
 
