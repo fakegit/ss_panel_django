@@ -1,0 +1,9 @@
+.admin-front-left{
+    
+    float:left;
+    width: 300px;
+}
+
+.admin-front-right{
+    margin-left:300px;
+}

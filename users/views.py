@@ -8,6 +8,7 @@ from django.template import RequestContext
 from . import services
 from .forms import RegisterForm,LoginForm,UpdateLoginForm,UpdateSSPwdForm
 from users.models import Users
+from nodes.models import Nodes
 from utils.timeutils import TimeUtils
 from utils.strutils import StrUtils
 from utils.encrptyutils import EncrptyUtils
@@ -188,8 +189,10 @@ def userCenter(request):
 def nodeList(request):
     if 'useruuid' in request.session:
         user_data = Users.objects.get(useruuid=str(request.session['useruuid']))
-        #trans_data = user_data.to_dict()
-
+        trans_data = user_data.to_dict()
+        nodes_data = Nodes.objects.all()[0]
+        trans_data['nodename'] = nodes_data.nodename
+        return render_to_response('users/users_nodes.html',trans_data)
     else:
         form = LoginForm()
         return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))

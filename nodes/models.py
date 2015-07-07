@@ -10,6 +10,5 @@ class Nodes(models.Model):
     nodedescr = models.CharField(max_length=512)
     nodestatus = models.CharField(max_length=20)
     nodeorder = models.IntegerField()
-    
-   
+
 

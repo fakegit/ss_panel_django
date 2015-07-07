@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}看世界{% endblock %}
+
+{% block content %}
+<h1>登录!</h1>
+
+<form id='admin_login_submit'  action='' method='post' >
+    {% csrf_token %}
+    {{form}}
+    <input type ='submit' value='登录'></input>
+</form>
+{% endblock %}
+
+{% block myscript %}
+{% load staticfiles %}
+<script src="{% static "js/jquery.md5.js" %}"></script>
+
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $("#admin_login_submit").submit(function() {
+            $('#id_adminuserpwd').val($.md5($('#id_adminuserpwd').val()))
+            //alert($('#id_userpwd').val());
+            return true;
+        });
+    })
+</script>
+{% endblock %} 
