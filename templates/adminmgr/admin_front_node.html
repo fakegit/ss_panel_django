@@ -13,21 +13,13 @@
 {% include 'adminmgr/admin_front_left.html' %}
 
 <div class='admin-front-right'>
+<ul>
+<li>node0</li>
+<li>node1</li>
+<li>node2</li>
 
-<h1>用户中心</h1>
+</ul>
 
-<h1>连接信息</h1>
-<div>
-<p>端口:{{port}}</p>
-<p>密码:{{sspwd}}</p>
-<p>最后使用时间:{{last_online_ts}}</p>
-</div>
-<h1>流量使用情况</h1>
-
-<p>总流量：{{transfer_enable}} G</p>
-<p>已使用流量：{{transfer_used}} G</p>
-<p>剩余流量：{{transfer_last}} G</p>
-<p></p>
 </div>
 {% endblock %}
 

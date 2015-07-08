@@ -5,7 +5,7 @@
 {% block content %}
 <h1>登录!</h1>
 
-<form id='admin_login_submit'  action='' method='post' >
+<form id='admin_login_submit'  action='{% url 'adminLoginForm' %}' method='post' >
     {% csrf_token %}
     {{form}}
     <input type ='submit' value='登录'></input>
