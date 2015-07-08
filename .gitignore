@@ -1,3 +1,4 @@
 ss_panel_django/settings_local.py
 *.sqlite3
 *.pyc
+node_modules/*
