@@ -3,23 +3,57 @@
 {% block title %}看世界{% endblock %}
 
 {% block content %}
-<h1>注册</h1>
-<p>{{errmsg}}</p>
-<form id='register_submit' action='/users/registerForm' method='post'>
-    {% csrf_token %}
-    {{form}}
-    <!--label for='username'>用户名: </label>
-    <input id='username' name='username' type='text' maxlength='30'/>
+<div class='container'>
+    <h1>注册</h1>
+    <p>{{errmsg}}</p>
 
-    <label for='email'>邮&nbsp;箱</label>
-    <input id='email' name='email' type='text' maxlength='30' />
-    <label for='userpwd'>密码</label>
-    <input id='userpwd' name='userpwd' type='password' />
-    <label for='reuserpwd'>确认密码</label>
-    <input id='reuserpwd' name='reuserpwd' type='password' /-->
-    <input type ='submit' value='注册'></input>
-    <button class='js-captcha-refresh'>刷新验证码</button>
-</form>
+
+    <form id='register_submit' class="form-horizontal" action='/users/registerForm' method='post'>
+        {% csrf_token %}
+        <fieldset>
+        <legend>注册!</legend>        
+        {% for field in form %}
+
+            {% ifequal field.id_for_label  'id_captcha_1' %}
+               <div class='form-group'>
+                  <label for="{{ field.id_for_label }}" class="col-lg-2 control-label">{{ field.label }}</label>
+                  <div class="col-lg-6">
+                    {{form.captcha}}
+                    
+                  </div>
+                  <div class="col-lg-4">
+                    <button class='js-captcha-refresh'>刷新验证码</button>
+                  </div>
+                  
+                  {{ field.errors }}
+                  {{ field.label_tag }} 
+              </div>              
+            {% else %}
+              <div class='form-group'>
+                  <label for="{{ field.id_for_label }}" class="col-lg-2 control-label">{{ field.label }}</label>
+                  <div class="col-lg-10">
+                    {{ field }}
+                  </div>
+                  {{ field.errors }}
+                  {{ field.label_tag }} 
+              </div>            
+            {% endifequal %}
+
+
+        {% endfor %}
+        <!--label for='username'>用户名: </label>
+        <input id='username' name='username' type='text' maxlength='30'/>
+
+        <label for='email'>邮&nbsp;箱</label>
+        <input id='email' name='email' type='text' maxlength='30' />
+        <label for='userpwd'>密码</label>
+        <input id='userpwd' name='userpwd' type='password' />
+        <label for='reuserpwd'>确认密码</label>
+        <input id='reuserpwd' name='reuserpwd' type='password' /-->
+        <button type ='submit'  class="btn btn-primary">注册</button>
+        <button type="reset" class="btn btn-default">重置</button>
+    </form>
+</div>
 {% endblock %}
 
 {% block myscript %}

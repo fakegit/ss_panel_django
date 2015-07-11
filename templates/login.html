@@ -3,14 +3,56 @@
 {% block title %}看世界{% endblock %}
 
 {% block content %}
-<h1>登录!</h1>
 
-<form  id='login_submit'  action='{% url 'loginForm' %}' method='post' >
-    {% csrf_token %}
-    {{form}}
-    {{errmsg}}
-    <input type ='submit' value='登录'></input>
-</form>
+
+<div class='container'>
+
+  <div class='class="bs-docs-section"'>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h1>Shadowsocks</h1>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-lg-6 col-lg-offset-3'>
+        <div class='well bs-component'>
+
+          <form  id='login_submit' class='form-horizontal'  action='{% url 'loginForm' %}' method='post' >
+              {% csrf_token %}
+              <fieldset>
+              <legend>登录!</legend>        
+              {% for field in form %}
+              
+              
+                  <div class='form-group'>
+                      <label for="{{ field.id_for_label }}" class="col-lg-2 control-label">{{ field.label }}</label>
+                      <div class="col-lg-10">
+                        {{ field }}
+                      </div>
+                      {{ field.errors }}
+                      {{ field.label_tag }} 
+                  </div>
+                
+              {% endfor %}
+
+              <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary" >登录</button>
+                        <button type="reset" class="btn btn-default">重置</button>
+                    
+                    </div>
+                    </div>    
+              </fieldset>  
+              {{errmsg}}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block myscript %}
