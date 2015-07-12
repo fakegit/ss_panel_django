@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block title %}看世界{% endblock %}
-
+{% block link %}
+ <link  href="{% static "css/users.css" %}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
 <div class='container'>
-    <h1>注册</h1>
-    <p>{{errmsg}}</p>
-
-
+    <div class='banner-span'></div>
+    <div class='col-lg-6 col-lg-offset-3'>
+      
     <form id='register_submit' class="form-horizontal" action='/users/registerForm' method='post'>
         {% csrf_token %}
         <fieldset>
@@ -16,17 +17,19 @@
 
             {% ifequal field.id_for_label  'id_captcha_1' %}
                <div class='form-group'>
+                <div class='row'>
                   <label for="{{ field.id_for_label }}" class="col-lg-2 control-label">{{ field.label }}</label>
-                  <div class="col-lg-6">
+                  <div class='col-lg-6'>
+                    <div class='row form-captcha'>
                     {{form.captcha}}
-                    
+                    </div>                  
                   </div>
-                  <div class="col-lg-4">
-                    <button class='js-captcha-refresh'>刷新验证码</button>
-                  </div>
-                  
+                  <div class='col-lg-2'>
+                  <button class='js-captcha-refresh btn btn-default'>刷新验证码</button>
+                  </div>            
                   {{ field.errors }}
                   {{ field.label_tag }} 
+                </div>
               </div>              
             {% else %}
               <div class='form-group'>
@@ -50,14 +53,19 @@
         <input id='userpwd' name='userpwd' type='password' />
         <label for='reuserpwd'>确认密码</label>
         <input id='reuserpwd' name='reuserpwd' type='password' /-->
-        <button type ='submit'  class="btn btn-primary">注册</button>
-        <button type="reset" class="btn btn-default">重置</button>
+        <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button type ='submit'  class="btn btn-primary">注册</button>
+          <button type="reset" class="btn btn-default">重置</button>
+        </div>
+        </div>        
     </form>
+    </div>
 </div>
 {% endblock %}
 
 {% block myscript %}
-{% load staticfiles %}
+
 <script  src="{% static "js/jquery.md5.js" %}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -75,7 +83,8 @@ $(document).ready(function(){
 
         return false;
     });
-
+    //$('.form-captcha img').addClass('col-lg-5');
+    //$('.form-captcha #id_captcha_1').addClass('col-lg-3 form-control');
     $('#register_submit').submit(function(){
         $('#id_userpwd').val($.md5($('#id_userpwd').val()))
         $('#id_reuserpwd').val($.md5($('#id_reuserpwd').val()))

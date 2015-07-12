@@ -8,26 +8,31 @@
 {% endblock %}
 
 {% block content %}
+<div class='container'>
+<div class='row'>
+    {% include 'users/users_front_left.html' with actnum=0 %}
 
-{% include 'users/users_front_header.html' %}
-{% include 'users/users_front_left.html' %}
 
-<div class='users-front-right'>
+    <div class='col-lg-9'>
+        <div class='banner-span'></div>
+        <h1>用户中心</h1>
 
-<h1>用户中心</h1>
+        <h1>连接信息</h1>
+        <div>
+        <p>端口:{{port}}</p>
+        <p>密码:{{sspwd}}</p>
+        <p>最后使用时间:{{last_online_ts}}</p>
+        </div>
+        <h1>流量使用情况</h1>
 
-<h1>连接信息</h1>
-<div>
-<p>端口:{{port}}</p>
-<p>密码:{{sspwd}}</p>
-<p>最后使用时间:{{last_online_ts}}</p>
+        <p>总流量：{{transfer_enable}} G</p>
+        <p>已使用流量：{{transfer_used}} G</p>
+        <p>剩余流量：{{transfer_last}} G</p>
+        <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: {{transfer_used_scale}}%"></div>
+        </div>
+    </div>
 </div>
-<h1>流量使用情况</h1>
-
-<p>总流量：{{transfer_enable}} G</p>
-<p>已使用流量：{{transfer_used}} G</p>
-<p>剩余流量：{{transfer_last}} G</p>
-<p></p>
 </div>
 {% endblock %}
 

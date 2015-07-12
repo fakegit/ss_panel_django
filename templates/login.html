@@ -1,23 +1,19 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block title %}看世界{% endblock %}
-
+{% block link %}
+ <link  href="{% static "css/users.css" %}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
 
 
 <div class='container'>
 
   <div class='class="bs-docs-section"'>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="page-header">
-          <h1>Shadowsocks</h1>
-        </div>
-      </div>
-    </div>
+  <div class='banner-span'></div>
     <div class='row'>
       <div class='col-lg-6 col-lg-offset-3'>
-        <div class='well bs-component'>
+        <!-- <div class='well bs-component'> -->
 
           <form  id='login_submit' class='form-horizontal'  action='{% url 'loginForm' %}' method='post' >
               {% csrf_token %}
@@ -43,11 +39,11 @@
                         <button type="reset" class="btn btn-default">重置</button>
                     
                     </div>
-                    </div>    
+              </div>    
               </fieldset>  
               {{errmsg}}
           </form>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -56,7 +52,7 @@
 {% endblock %}
 
 {% block myscript %}
-{% load staticfiles %}
+
 <script src="{% static "js/jquery.md5.js" %}"></script>
 
 <script type='text/javascript'>

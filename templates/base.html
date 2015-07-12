@@ -21,7 +21,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../" class="navbar-brand">影梭</a>
+          <a href="{% url 'loginForm' %}" class="navbar-brand">影梭</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
@@ -32,7 +32,7 @@
                 <li class="divider"></li>
                 <li><a href="#">流量套餐</a></li>
                 <li class="divider"></li>
-                <li><a href="./variables.less">包年套餐</a></li>
+                <li><a href="#">包年套餐</a></li>
               </ul>
             </li>        
             <li>
@@ -43,12 +43,18 @@
             </li>
 
           </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login" >登陆</a></li>
-            <li><a href="/register" target="_blank">注册</a></li>
-          </ul>
-
+          {% if username %}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'loginForm' %}" >欢迎,{{username}}</a></li>
+              <li><a href="{% url 'logout' %}">退出</a></li>
+            </ul> 
+          {% else %}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/login" >登陆</a></li>
+              <li><a href="/register">注册</a></li>
+            </ul>
+         
+          {% endif %}
         </div>
       </div>
     </div>    

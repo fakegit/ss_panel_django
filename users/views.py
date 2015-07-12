@@ -40,15 +40,27 @@ def loginForm(request):
                 trans_data['transfer_used'] = (trans_data['up_transfer'] + trans_data['down_transfer'])/1000/1000/1024
                 trans_data['transfer_last'] = trans_data['transfer_enable']-trans_data['transfer_used']
                 trans_data['last_online_ts'] = TimeUtils.getDatetimeFromTS(trans_data['last_online_ts'])
-
+                trans_data['transfer_used_scale'] = trans_data['transfer_used']/trans_data['transfer_enable']*100
                 request.session['useruuid'] = trans_data['useruuid']
 
                 return render_to_response('users/users_front.html',trans_data) 
 
             return render_to_response('users/users_front.html',{'errormsg':'password error;'})
     else:
-        form = LoginForm()
-        return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))
+        if 'useruuid' in request.session and request.session['useruuid'] is not None:
+            user_data = Users.objects.get(useruuid=request.session['useruuid'])
+            trans_data = user_data.to_dict()
+            trans_data['transfer_enable'] =  trans_data['transfer_enable']/1000/1000/1024
+            trans_data['transfer_used'] = (trans_data['up_transfer'] + trans_data['down_transfer'])/1000/1000/1024
+            trans_data['transfer_last'] = trans_data['transfer_enable']-trans_data['transfer_used']
+            trans_data['last_online_ts'] = TimeUtils.getDatetimeFromTS(trans_data['last_online_ts'])
+
+            request.session['useruuid'] = trans_data['useruuid']   
+            return render_to_response('users/users_front.html',trans_data) 
+        else:            
+
+            form = LoginForm()
+            return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))
     
 
 def register(request):

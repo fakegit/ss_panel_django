@@ -1,9 +1,17 @@
-<div class='users-front-left'>
+<div class='col-lg-3'>
+    <div class='banner-span'></div>
 
-<ul>
+<ul class='nav nav-pills nav-stacked user-front-left'>
     <li><a href="{% url 'userCenter' %}">用户中心</a></li>
     <li><a href="{% url 'nodeList' %}">节点列表</a></li>
     <!-- <li><a href="{% url 'userCenter' %}">我的信息</a></li> -->
     <li><a href="{% url 'updateUserInfo' %}">修改资料</a></li>
 </ul>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //alert()
+        $('.user-front-left li').eq({{actnum}}).addClass('active');
+        //.addClass('active')
+    })
+</script>

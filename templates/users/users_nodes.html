@@ -8,12 +8,16 @@
 {% endblock %}
 
 {% block content %}
+<div class='container'>
+<div class='row'>
+    {% include 'users/users_front_left.html' with actnum=1 %}
 
-{% include 'users/users_front_header.html' %}
-{% include 'users/users_front_left.html' %}
+    <div class='col-lg-9'>
+        <div class='banner-span'></div>
+        {{nodename}}
+    </div>
 
-<div class='users-front-right'>
-{{nodename}}
+</div>
 </div>
 {% endblock %}
 

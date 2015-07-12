@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block title %}看世界{% endblock %}
-
+{% block link %}
+ <link  href="{% static "css/users.css" %}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
 
 
 <div class='container'>
+    <div  class='banner-span'></div>
     <div class='bs-docs-section'>
         <div class='row'>
         <div class="col-lg-12">
-            <div class="page-header">
+<!--             <div class="page-header">
                 <h1 id="container"></h1>
-            </div>
+            </div> -->
             <div class="bs-component">
                 <div class="jumbotron">
                 <h1>Shadowsocks</h1>
