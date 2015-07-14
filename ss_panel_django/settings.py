@@ -127,7 +127,7 @@ EMAIL_HOST = 'smtp.exmail.qq.com'
 
 EMAIL_PORT = 587
 
-EMAIL_USE_TLS = False
+#EMAIL_USE_TLS = False
 
 EMAIL_HOST_USER = 'user@gmail.com'
 
