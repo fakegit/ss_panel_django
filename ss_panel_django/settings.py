@@ -123,11 +123,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 # setting your emails
-EMAIL_HOST = 'smtp.exmail.qq.com'
+EMAIL_HOST = 'smtp.qq.com'
 
-EMAIL_PORT = 587
+EMAIL_PORT = 465
 
-#EMAIL_USE_TLS = False
+#EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'user@gmail.com'
 
