@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.core.mail import send_mail
 
 def index(request):
-    send_mail('Subject here', 'Here is the message.', 'ducg@foxmail.com',['strengthening@aliyun.com'], fail_silently=False)
+    
     return render_to_response('index.html')
 
 

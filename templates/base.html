@@ -8,12 +8,13 @@
     <title>{% block title %}{% endblock %}</title>
     {% load staticfiles %}
     <!--link  href="{% static "css/reset.css" %}" rel="stylesheet" /-->
-    <link  href="{% static "css/bootstrap.css" %}" rel="stylesheet" />
+
+    <link  href="{% static "css/bootstrap.css" %}" rel="stylesheet" media="screen" />
     <link  href="{% static "css/_bootswatch.css" %}" rel="stylesheet" />
     {% block link %}{% endblock %}
     <!--link href="{% static "css/my.css" %}" rel="stylesheet"/-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script-->
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{% static "js/bootstrap.js" %}"></script>
   </head>

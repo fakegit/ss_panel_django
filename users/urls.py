@@ -13,5 +13,5 @@ urlpatterns = [
     
     url(r'^userCenter$',views.userCenter,name='userCenter'),
     url(r'^nodeList$',views.nodeList,name='nodeList'),
-    
+    url(r'^reSendActiveEmail$',views.reSendActiveEmail,name='reSendActiveEmail'),
 ]

@@ -13,6 +13,9 @@ from utils.timeutils import TimeUtils
 from utils.strutils import StrUtils
 from utils.encrptyutils import EncrptyUtils
 from django.db.models import Max
+from django.core.mail import send_mail
+from json import *
+import threading
 
 
 def login(request):
@@ -31,8 +34,11 @@ def loginForm(request):
             try:
                 user_data = Users.objects.get(username=username)
             except Exception,e:
-                return render_to_response('login.html',{'form':form,'errmsg':'user not exist'},context_instance = RequestContext(request))
-            
+                return render_to_response('login.html',{'form':form,'errormsg':'您输入的账号有误'})
+
+            if not user_data.actived:
+                return render_to_response('login.html',{'form':form,'errormsg':'您输入的账号未激活，请登陆您的注册邮箱'+str(user_data.email)+'进行激活','errorlink':'#','reactiveemail':str(user_data.email)})
+
             encrptuserpwd = EncrptyUtils.getMd5(userpwd+str(user_data.register_ts))
             if user_data.encrptuserpwd == encrptuserpwd:
                 trans_data = user_data.to_dict()
@@ -44,8 +50,8 @@ def loginForm(request):
                 request.session['useruuid'] = trans_data['useruuid']
 
                 return render_to_response('users/users_front.html',trans_data) 
-
-            return render_to_response('users/users_front.html',{'errormsg':'password error;'})
+            else:
+                return render_to_response('login.html',{'form':form,'errormsg':'您输入的密码有误，请重新输入'})
     else:
         if 'useruuid' in request.session and request.session['useruuid'] is not None:
             user_data = Users.objects.get(useruuid=request.session['useruuid'])
@@ -94,13 +100,18 @@ def registerForm(request):
                 switch = 1,
                 enable = 1,
                 usertype = 0,
+                actived=0,
             )
             user_data.save()
-
+            #t1 = threading.Thread(target=send_mail,args=('ss active ', 'http://127.0.0.1:8000/ please click it and active your account', 'ducg@foxmail.com',[email], fail_silently=False))
+            #t1.start()
+            send_mail('ss active ', 'http://127.0.0.1:8000/ please click it and active your account', 'ducg@foxmail.com',[email], fail_silently=False)
             return render_to_response('users/register_success.html',{'username':username})
+        else:
+            return render_to_response('register.html',{'form':form})
     else:
         form = RegisterForm()
-        return render(request, 'register.html', {'form': form})
+        return render_to_response(request, 'register.html', {'form': form})
 
 def logout(request):
     form = LoginForm()
@@ -209,3 +220,26 @@ def nodeList(request):
         form = LoginForm()
         return render_to_response('login.html',{'form':form},context_instance = RequestContext(request))
 
+@csrf_exempt
+def reSendActiveEmail(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        useremail = request.POST.get('useremail')
+        d = {}
+        d['result'] = 0
+
+        try:
+            user_data = Users.objects.get(username=username,email=useremail)
+        except Exception,e:
+            d['msg'] = '激活邮件未发送成功，您输入的用户名和邮箱不匹配'
+            json_data = JSONEncoder().encode(d)
+            return HttpResponse(json_data,content_type="application/json")
+            
+        send_mail('ss active ', 'http://127.0.0.1:8000/ please click it and active your account', 'ducg@foxmail.com',[email], fail_silently=False)
+        d['result'] = 1
+        d['msg'] = '激活邮件发送，请登陆邮箱进行激活'
+        json_data = JSONEncoder().encode(d)
+        return HttpResponse(json_data,content_type='application/json')
+
+    else:
+        return HttpResponse('hehe')

@@ -32,14 +32,28 @@
                   </div>
                 
               {% endfor %}
+              <div class='form-group'>
+                  {% if errormsg %}
+                  <div class='col-lg-10 col-lg-offset-2'>
+                      <div class="alert alert-dismissible alert-danger">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <strong>【错误】</strong> 
+                          <p>{{errormsg}}</p>
+                          {% if errorlink %}
+                          <a class='alert-link' href='#'>重发激活邮件</a>
+                          {% endif %}
 
-              <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary" >登录</button>
-                        <button type="reset" class="btn btn-default">重置</button>
-                    
-                    </div>
-              </div>    
+
+                      </div>
+                  </div> 
+                  {% endif %}
+                  <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary" >登录</button>
+                      <button type="reset" class="btn btn-default">重置</button>
+                  
+                  </div> 
+              </div>
+
               </fieldset>  
               {{errmsg}}
           </form>
@@ -64,6 +78,28 @@
             return true;
         });
 
+    })
+
+
+    $('.alert-link').click(function(){
+        // alert($('#id_username').val())
+        // alert('{{reactiveemail}}');
+        $.ajax({
+            url:'/users/reSendActiveEmail',
+            method:'POST',
+            data:{useremail:'{{reactiveemail}}',username:$('#id_username').val()},
+            dataType:'json',
+            success:function(data,status,xhr){
+                if(data.result==1){
+                    $('.alert-link').unbind( "click" );
+                    
+                }
+                alert(data.msg);
+              // alert()
+                // var jdata = $.parseJSON(data)
+                // alert(jdata)
+            }
+        });
     })
 
 </script>

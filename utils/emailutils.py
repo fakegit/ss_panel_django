@@ -5,7 +5,7 @@ settings.configure()
 
 def sendmail():
     #print 'fsdfs'
-    send_mail('Subject here', 'Here is the message.', 'strengthen2010@gmail.com',['strengthening@aliyun.com'], fail_silently=False)
+    #send_mail('Subject here', 'Here is the message.', 'ducg@foxmail.com',['strengthening@aliyun.com'], fail_silently=False)
 
 if __name__== '__main__':
     sendmail()

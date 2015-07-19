@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^register$','users.views.register' ,name='register'),
     url(r'^users/', include('users.urls')),
     url(r'^captcha/', include('captcha.urls')),
+    
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -19,6 +19,7 @@ class Users(models.Model):
     transfer_enable = models.BigIntegerField(default=2048000000)  #用户可用流量
     port = models.IntegerField()
     switch = models.IntegerField() 
+    actived = models.BooleanField(default=False)#用户是否邮箱激活
     enable = models.BooleanField(default=True)  #用户可用
     usertype = models.IntegerField()  #用户套餐
 
