@@ -30,5 +30,8 @@
 {% endblock %}
 
 {% block myscript %}
-
+<script src="{% static 'django_evercookie/swfobject-2.2.min.js' %}"></script>
+<script src="{% url 'django_evercookie.views.evercookie_core' %}"></script>
+{% load evercookie_js_api %}
+{% set_evercookie ec_obj='evercookie' name='test' value='12345678' %}
 {% endblock %} 

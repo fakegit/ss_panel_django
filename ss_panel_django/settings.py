@@ -37,13 +37,17 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'adminmgr',
     'users',
     'nodes',
     'captcha',
+    'django_evercookie',
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django_dont_vary_on.middleware.RemoveUnneededVaryHeadersMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -137,6 +141,8 @@ EMAIL_HOST_PASSWORD = 'yourpassword'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+
+SITE_ID=1
 
 #if you has a local settings file like settings_local
 try:
