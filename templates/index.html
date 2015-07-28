@@ -33,5 +33,25 @@
 <script src="{% static 'django_evercookie/swfobject-2.2.min.js' %}"></script>
 <script src="{% url 'django_evercookie.views.evercookie_core' %}"></script>
 {% load evercookie_js_api %}
-{% set_evercookie ec_obj='evercookie' name='test' value='12345678' %}
+
+<script>
+    var evercookie=new evercookie();
+    function getC(dont) {
+
+        evercookie.get("test", function(best, all) {
+            alert(best)
+            for (var item in all){
+
+                var payload = JSON.stringify({item: all});
+                alert(item+'----'+payload);
+            }
+                 
+            if (!dont)
+                getC(1);
+        }, dont);
+    }
+setTimeout(getC, 300, 1);
+
+
+</script>
 {% endblock %} 
